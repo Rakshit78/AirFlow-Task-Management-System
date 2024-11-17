@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 
 app.get('/tasks/add', (req, res) => {
   let { taskId, text, priority } = req.query;
-  const result = [...tasks, { taskId, text, priority }];
+  const result = [...tasks, { taskId:parseInt(taskId), text, priority:parseInt(priority) }];
   res.json({ tasks: result });
 });
 
@@ -41,7 +41,7 @@ app.get('/tasks/edit-priority', (req, res) => {
   const { taskId, priority } = req.query;
   const result = tasks.map((res) => {
     if (res.taskId == taskId) {
-      return { ...res, priority: priority };
+      return { ...res, priority: parseInt(priority) };
     } else {
       return res;
     }
